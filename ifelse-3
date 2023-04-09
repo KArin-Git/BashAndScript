@@ -1,0 +1,11 @@
+#!/bin/bash
+condition=$1
+if [ condition = 2 ]
+then
+	echo "The condition is TRUE"
+	echo "Action 1"
+else
+	echo "The condition is FALSE"
+	echo "Action 2"
+fi
+** else.sh 2 >> INPUT argument
