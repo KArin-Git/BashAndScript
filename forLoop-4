@@ -1,0 +1,6 @@
+#!/bin/bash
+for var in “$#”
+do
+	#put "" incase user input char
+	echo "$var"
+done
