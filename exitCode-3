@@ -1,0 +1,20 @@
+#!/bin/bash
+echo -n "Is everything alright? (y/n)"
+read response
+if [ $response = "y" ]
+then
+        echo "Good to hear"
+        exit 5
+else
+        echo "Sounds like and ERROR"
+        exit 77
+fi
+echo "THX"
+echo "Bye"
+
+#y
+#echo $?
+#5 >> because we write it exit 5
+#n
+#echo $?
+#77 >> because we write it exit 77
