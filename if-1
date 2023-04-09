@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Total number of argument is : $#"
+if [ $# = 1 ]
+then
+	echo "The argument passed from the user is $1"
+fi
+echo "BYE"
