@@ -1,0 +1,15 @@
+#!/bin/bash
+grep -i "$1" ~/uli101/cars.txt
+if [ $? = 1 ]
+then
+	echo "SRY! $1 is not in cars.txt"
+	exit 66
+fi
+
+#arg ford
+#echo $?
+#0
+
+#arg testla
+#echo $?
+#66
