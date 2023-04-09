@@ -1,0 +1,11 @@
+#!/bin/bash
+condition=dog
+if [ condition = 1 ]
+then
+        echo "The condition is TRUE"
+        echo "Action 1"
+else
+        echo "The condition is FALSE"
+        echo "Action 2"
+fi
+echo "GOOD BYE!"
