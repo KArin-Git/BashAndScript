@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Loop is now starting..."
+for animals in dog frog squirrel horse elephant
+do
+	echo —————
+	echo $animals
+	echo —————
+	echo
+  read
+#pause >> waiting for user press ENTER
+done
+echo "Loop is over!"
