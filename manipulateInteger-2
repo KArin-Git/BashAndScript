@@ -1,0 +1,9 @@
+#!/bin/bash
+a=4
+b=2
+result=$(( $a - $b))
+echo $result
+if [ $result -lt 10 ]
+then
+	echo "The sum is less than 10"
+fi
