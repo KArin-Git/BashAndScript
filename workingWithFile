@@ -1,0 +1,18 @@
+#!/bin/bash
+fileInQuestion=$1
+if [ $# != 1 ] 
+then
+	echo "Please use only ONE argument"
+	exit 4
+fi
+#we check only 1 file at a time
+if [ -f $fileInQuestion ]
+then
+	echo "$fileInQuestion exists"
+	exit 5
+else
+	echo "$fileInQuestion does not exist"
+	touch $fileInQuestion
+	echo "...but we will create it"
+	exit 6
+fi
