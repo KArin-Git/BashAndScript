@@ -1,0 +1,177 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17940\viewh10520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 1. Shell configuration files
+\f1\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Shell config filess are scripts that are run when you log in/out or start a new shell\
+	in root user\
+		/etc/profile:    the first start-up file that executes when you log in\
+	in the user's home directory\
+		~/.bash_profile: runs when you log in\
+		~/.bashrc:       runs when you start an interactive subshell\
+		~/.bash_logout:  runs when you log out\
+The start-up file can be used for\
+1. Set the prompt and screen display\
+2. Create local variables\
+3. Create temporary Linux commands (aliases)\
+\
+
+\f0\b 2. Shell variables
+\f1\b0 \
+Variables are classified in 2 groups\
+	1. System (shell) variables >> describing the working environment\
+	2. User-created variables   >> associated with scripts\
+Variables can be READ/WRITE or READ-ONLY\
+Variables' name can be any sequence of letters and numbers BUT not start with a number\
+Common shell variables\
+	PS1		>> primary prompt\
+	PWD		>> present working directory\
+	HOME	>> absolute path to user's home\
+	PATH	>> list of directoried where executables are\
+	HOST	>> name of the host\
+	USER	>> name of the user logged in\
+	SHELL	>> current shell\
+	** set cmd >> display all available variables **\
+Assigning a value\
+	Syntax:		name=value\
+	Example:	\
+		course=ULI101\
+		phone="1 800 123-4567"	>> ** having sapce NEED double quote **\
+	\
+	Syntax:		readonly variable\
+	Example:\
+		readonly phone\
+		readonly >> ** if no variable name supply, a list of read onnly variable will be displayed **\
+Removing variables\
+	Syntax:		name=\
+			OR\
+			unset name\
+	Example:\
+		course=\
+		unset course\
+		** read only variables cannot be removed, loggin out to be clear **\
+Variable substitution\
+	Syntax:		$name >> ** using the value of the variable by assign $ in front of variable's name **\
+	Example:\
+		name=Bob\
+		echo $name\
+\
+
+\f0\b 3. Shell scripting
+\f1\b0 \
+	first line >> specify the path to the program which executes the script\
+	Example:\
+		#!/bin/bash\
+
+\f0\b 3.1 position parameter
+\f1\b0 \
+	cmd line parameters			>> $0...$9\
+	if cmd line parameters -ge 10	>> $\{10\} $\{11\} $\{12\}\
+	$* and $@				>> all cmd line arg\
+	$#						>> total no. of parameters/arg\
+	"$*"						>> a single "string" containing values of all arg seperated by a single space\
+	"$@"						>> multiple "string", containing the value of one arg \
+
+\f0\b 3.2 echo cmd
+\f1\b0 \
+	Display msg to the terminal followed by a newline\
+	** echo -n >> to suppress the default newline **\
+	output can be redirected or piped\
+	echo "arg1 arg1 arg1"		>> double quotes == preserve spaces\
+	echo "$name"				>> showing value of name\
+	echo '$name'				>> showing $name\
+
+\f0\b 3.3 read cmd
+\f1\b0 \
+	SYNTAX:		read\
+		** everything is captured until the Enter key is passed (\\n) **\
+	EXAMPLE:\
+		echo -n \'91What is your name? \'93\
+		read name\
+		echo \'93Hello $name\'94\
+
+\f0\b 3.4 using logic >> if statement
+\f1\b0 \
+	SYNTAX:\
+		if [ condition ]		>> ** Notice the space after [ and before ] **\
+		then\
+			cmd\
+		fi\
+	EXAMPLE:\
+		read password\
+		if [ \'93$password\'94 = \'93P@aaw0rd!\'94 ]\
+		then\
+			echo \'93BAD PASSWORD!\'94\
+		fi\
+
+\f0\b 3.5 test cmd\
+
+\f1\b0 	SYNTAX:	echo $?
+\f0\b \
+
+\f1\b0 	can be used in 2 ways\
+		1. as a pair of square brackets: [ condition ]\
+		2. the test keyword:			test condition\
+	the result of the test condition\
+		1. 0 == success\
+		2. 1 == failure\
+		** unless the negation \'93not\'94 (!) is used **\
+	can compare numbers, strings, and evaluate various file attributes\
+		** compare string **\
+			s1 = s2	>>	true if the string s1 and s2 are identical\
+			s1 != s2	>>	true if the string s1 and s2 are not identical\
+			s1 < s2	>>	true if string s1 comes before s2 base on binary value of their characters\
+			s1 > s2	>> 	true if string s1 comes after s2 base on binary value of their characters\
+		** compare integer **\
+			n1 -eq n2	>>	true if the integer n1 and n2 are algebraically equal.\
+			n1 -ne n2	>>	true is the integer n1 and n2 are not algebraically equal\
+			n1 -gt n2	>>	true if the integer n1 is algebraically greater than the integer n2\
+			n1 -ge n2	>>	true if the integer n1 is algebraically greater than or equal to integer n2\
+			n1 -lt n2	>>	true if the integer n1 is algebraically less than the integer n2\
+			n1 -le n2	>>	true if the integer n1 is algebraically less than or equal to integer n2\
+		use = and != to compare string\
+			EXAMPLE: [ \'93$name\'94 = \'93Bob\'94 ]\
+		use -z and -n to check string length\
+			EXAMPLE: [ ! -z \'93$name\'94 ]\
+		use -gt, -lt, -eq, -ne, -le, ge for number\
+			EXAMPLE: [ \'93$salary\'94 -gt 1000000 ]\
+		common files test operations\
+			-e	>>	file exists (regardless of type)\
+			-f	>>	file exists (ordinary file)\
+			-d	>>	file exists and is a directory\
+			-s	>> 	file exists and has a size greater than zero\
+			-r	>> 	file exists and read permission is granted\
+			-w	>> 	file exists and write permission is granted\
+			-x	>> 	file exists and execute permission is granted\
+
+\f0\b 3.6 using looops >> for loop\
+
+\f1\b0 	SYNTAX:\
+		for ITEM in LIST\
+		do\
+			cmd\
+		done\
+			** ITEM	>>	variable ITEM will hold one item from the LIST every time the loop iterates **\
+			** LIST	>>	can be typed in explicitly or supplied by a cmd **\
+	EXAMPLE:\
+		for addr in $(cat ~/addresses)\
+		do\
+			mail -s \'93Newsletter\'94 $addr < ~/spam/newsletter.txt\
+		done\
+	EXAMPLE:\
+		for count in 3 2 1 \'91BLAST OFF!!\'92\
+		do\
+			sleep 1\
+			echo $count\
+		done\
+	EXAMPLE:\
+		for id in $(seq 1 1000)\
+		do\
+			mkdir student_$id\
+		done\
+}
